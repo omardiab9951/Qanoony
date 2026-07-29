@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Qanoony Legal Assistant</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#ccdbf4",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#64539c",
+            "surface-container-high": "#dce9ff",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#e8deff",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#494453",
+            "secondary-fixed-dim": "#c9c5ce",
+            "inverse-on-surface": "#eaf1ff",
+            "on-secondary-fixed-variant": "#48464d",
+            "tertiary": "#4c3b82",
+            "primary-fixed": "#e9ddff",
+            "secondary": "#5f5d65",
+            "secondary-fixed": "#e5e1ea",
+            "surface-container-highest": "#d4e4fc",
+            "surface": "#f8f9ff",
+            "background": "#f8f9ff",
+            "on-surface": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#64616a",
+            "outline-variant": "#cbc3d5",
+            "on-tertiary-container": "#ded2ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-tint": "#6b46c1",
+            "on-background": "#0d1c2e",
+            "on-secondary-fixed": "#1c1b22",
+            "primary-container": "#6b46c1",
+            "inverse-surface": "#223144",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed": "#23005c",
+            "on-tertiary-fixed": "#1f0855",
+            "on-error": "#ffffff",
+            "secondary-container": "#e2dee8",
+            "primary-fixed-dim": "#d0bcff",
+            "on-primary-container": "#e1d2ff",
+            "on-error-container": "#93000a",
+            "primary": "#532aa8",
+            "inverse-primary": "#d0bcff",
+            "on-primary-fixed-variant": "#522aa7",
+            "surface-variant": "#d4e4fc",
+            "surface-container": "#e5eeff",
+            "tertiary-fixed-dim": "#cdbdff",
+            "outline": "#7a7484",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-fixed-variant": "#4c3b82",
+            "surface-container-low": "#eff4ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "sidebar-width": "280px",
+            "margin-mobile": "16px",
+            "margin-desktop": "40px",
+            "gutter": "24px",
+            "container-max": "1280px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["IBM Plex Sans"],
+            "body-sm": ["IBM Plex Sans"],
+            "body-md": ["IBM Plex Sans"],
+            "headline-lg": ["IBM Plex Sans"],
+            "headline-xl": ["IBM Plex Sans"],
+            "headline-md": ["IBM Plex Sans"],
+            "body-lg": ["IBM Plex Sans"],
+            "label-sm": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .chat-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    .animate-slide-in-right {
+      animation: slideInRight 0.3s ease-out;
+    }
+
+    .animate-slide-in-left {
+      animation: slideInLeft 0.3s ease-out;
+    }
+
+    [dir="rtl"] .sidebar-btn-active {
+      border-left-width: 0px;
+      border-right-width: 4px;
+      border-color: #532aa8;
+      border-radius: 0.75rem 0 0 0.75rem;
+    }
+
+    [dir="ltr"] .sidebar-btn-active {
+      border-left-width: 4px;
+      border-right-width: 0px;
+      border-color: #532aa8;
+      border-radius: 0 0.75rem 0.75rem 0;
+    }
+
+    .toast-show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-hide {
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background-color: rgba(13, 28, 46, 0.4);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface h-screen flex flex-col overflow-hidden transition-all duration-300">
+  <!-- Settings Modal -->
+  <div class="fixed inset-0 z-[100] modal-backdrop flex items-center justify-center p-4 hidden" id="settings-modal">
+    <div
+      class="bg-surface-container-lowest w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-fade-in border border-outline-variant">
+      <div class="p-6 border-b border-outline-variant flex justify-between items-center">
+        <h3 class="text-headline-md font-bold text-primary" id="settings-title">Settings</h3>
+        <button class="p-2 hover:bg-surface-container-low rounded-full transition-colors" id="close-settings">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto chat-container">
+        <!-- Account Settings -->
+        <div>
+          <h4 class="text-label-sm font-bold text-on-surface-variant uppercase tracking-wider mb-3"
+            id="setting-cat-account">Account Settings</h4>
+          <div class="space-y-2">
+            <button
+              class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors text-left rtl:text-right">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">person</span>
+                <span id="opt-profile">Profile Information</span>
+              </div>
+              <span class="material-symbols-outlined text-sm opacity-40">chevron_right</span>
+            </button>
+            <button
+              class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors text-left rtl:text-right">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">lock</span>
+                <span id="opt-password">Password &amp; Security</span>
+              </div>
+              <span class="material-symbols-outlined text-sm opacity-40">chevron_right</span>
+            </button>
+          </div>
+        </div>
+        <!-- Notifications -->
+        <div>
+          <h4 class="text-label-sm font-bold text-on-surface-variant uppercase tracking-wider mb-3"
+            id="setting-cat-notifications">Notification Preferences</h4>
+          <div class="space-y-4 px-3">
+            <div class="flex items-center justify-between">
+              <span class="text-body-md" id="opt-email">Email Notifications</span>
+              <input checked="" class="rounded text-primary focus:ring-primary h-5 w-5 cursor-pointer"
+                type="checkbox" />
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-body-md" id="opt-alerts">App Alerts</span>
+              <input checked="" class="rounded text-primary focus:ring-primary h-5 w-5 cursor-pointer"
+                type="checkbox" />
+            </div>
+          </div>
+        </div>
+        <!-- Display -->
+        <div>
+          <h4 class="text-label-sm font-bold text-on-surface-variant uppercase tracking-wider mb-3"
+            id="setting-cat-display">Display Mode</h4>
+          <div class="grid grid-cols-2 gap-3">
+            <button
+              class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-primary bg-primary-fixed/30 transition-all">
+              <span class="material-symbols-outlined text-primary">light_mode</span>
+              <span class="text-label-md" id="opt-light">Light Mode</span>
+            </button>
+            <button
+              class="flex flex-col items-center gap-2 p-4 rounded-xl border border-outline-variant hover:border-primary transition-all opacity-60">
+              <span class="material-symbols-outlined">dark_mode</span>
+              <span class="text-label-md" id="opt-dark">Dark Mode</span>
+            </button>
+          </div>
+        </div>
+        <!-- Legal -->
+        <div>
+          <h4 class="text-label-sm font-bold text-on-surface-variant uppercase tracking-wider mb-3"
+            id="setting-cat-legal">Legal</h4>
+          <button
+            class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-surface-container-low transition-colors text-left rtl:text-right text-primary font-medium"
+            id="disclaimer-trigger">
+            <span class="material-symbols-outlined">policy</span>
+            <span id="opt-disclaimer">Legal Disclaimer</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Toast Notification -->
+  <div
+    class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-full shadow-xl transition-all duration-300 toast-hide z-[100] flex items-center gap-2"
+    id="help-toast">
+    <span class="material-symbols-outlined text-sm">info</span>
+    <span id="toast-text">Help Center coming soon!</span>
+  </div>
+  <!-- TopNavBar -->
+  <header
+    class="bg-surface-container-lowest border-b border-outline-variant w-full h-16 z-50 flex items-center shrink-0">
+    <div class="max-w-container-max w-full mx-auto px-margin-desktop flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <span class="text-headline-md font-bold text-primary tracking-tight" id="logo-text">Qanoony</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <!-- Language Toggle -->
+        <div class="flex bg-surface-container-high rounded-lg p-1" id="language-toggle">
+          <button class="px-3 py-1 text-label-md font-bold bg-white text-primary rounded-md shadow-sm transition-all"
+            id="lang-en">EN</button>
+          <button class="px-3 py-1 text-label-md text-on-surface-variant hover:text-primary transition-all"
+            id="lang-ar">AR</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:opacity-80">
+            <span class="material-symbols-outlined" data-icon="language">language</span>
+          </button>
+          <button
+            class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:opacity-80"
+            id="settings-btn">
+            <span class="material-symbols-outlined" data-icon="settings">settings</span>
+          </button>
+          <button
+            class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:opacity-80">
+            <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="flex flex-1 overflow-hidden" id="layout-wrapper">
+    <!-- SideNavBar -->
+    <aside
+      class="w-sidebar-width bg-surface-container-low border-r border-outline-variant hidden md:flex flex-col h-full z-40 rtl:border-r-0 rtl:border-l"
+      id="side-nav">
+      <div class="p-6">
+        <h2 class="text-label-sm font-bold text-primary uppercase tracking-wider mb-6" id="consultation-header">Quick
+          Consultations</h2>
+        <nav class="space-y-1" id="sidebar-nav">
+          <button
+            class="sidebar-btn w-full flex items-center gap-3 px-4 py-3 text-label-md font-medium text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-xl group"
+            data-consultation="Company Formation">
+            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform"
+              data-icon="business">business</span>
+            <span class="nav-text" data-ar="تأسيس الشركات" data-en="Company Formation">Company Formation</span>
+          </button>
+          <button
+            class="sidebar-btn sidebar-btn-active w-full flex items-center gap-3 px-4 py-3 text-label-md font-medium text-primary bg-primary-fixed transition-all duration-200 ease-in-out"
+            data-consultation="Employment Contracts">
+            <span class="material-symbols-outlined" data-icon="contract">contract</span>
+            <span class="nav-text" data-ar="عقود العمل" data-en="Employment Contracts">Employment Contracts</span>
+          </button>
+          <button
+            class="sidebar-btn w-full flex items-center gap-3 px-4 py-3 text-label-md font-medium text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-xl group"
+            data-consultation="Tax Compliance">
+            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform"
+              data-icon="account_balance_wallet">account_balance_wallet</span>
+            <span class="nav-text" data-ar="الامتثال الضريبي" data-en="Tax Compliance">Tax Compliance</span>
+          </button>
+          <button
+            class="sidebar-btn w-full flex items-center gap-3 px-4 py-3 text-label-md font-medium text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-xl group"
+            data-consultation="Social Insurance">
+            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform"
+              data-icon="security">security</span>
+            <span class="nav-text" data-ar="التأمينات الاجتماعية" data-en="Social Insurance">Social Insurance</span>
+          </button>
+        </nav>
+      </div>
+      <div class="mt-auto p-6 border-t border-outline-variant/30">
+        <div
+          class="bg-primary p-4 rounded-xl text-on-primary shadow-lg shadow-primary/20 mb-4 overflow-hidden relative group cursor-pointer active:scale-[0.98] transition-transform">
+          <div class="relative z-10">
+            <p class="text-label-md font-bold mb-1" id="upgrade-title">Upgrade to Pro</p>
+            <p class="text-xs opacity-80 mb-3" id="upgrade-desc">Unlimited AI legal consultations and document drafting.
+            </p>
+            <button
+              class="w-full bg-surface-container-lowest text-primary text-label-md font-bold py-2 rounded-lg hover:bg-surface-bright transition-colors"
+              id="upgrade-btn">Upgrade Now</button>
+          </div>
+          <div
+            class="absolute -right-4 -bottom-4 opacity-10 rtl:right-auto rtl:-left-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-6xl" data-icon="gavel">gavel</span>
+          </div>
+        </div>
+        <nav class="space-y-1">
+          <button
+            class="w-full flex items-center gap-3 px-4 py-2 text-label-md font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-all duration-200 rounded-lg cursor-pointer"
+            id="help-center-btn">
+            <span class="material-symbols-outlined" data-icon="help">help</span>
+            <span id="help-text">Help Center</span>
+          </button>
+          <button
+            class="w-full flex items-center gap-3 px-4 py-2 text-label-md font-medium text-error hover:bg-error-container/20 transition-all duration-200 rounded-lg cursor-pointer">
+            <span class="material-symbols-outlined" data-icon="logout">logout</span>
+            <span id="logout-text">Log Out</span>
+          </button>
+        </nav>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col relative bg-surface-container-lowest h-full overflow-hidden">
+      <!-- Background Decoration -->
+      <div class="absolute inset-0 pointer-events-none opacity-[0.05]">
+        <div class="w-full h-full"
+          style="background-image: radial-gradient(#532aa8 1px, transparent 1px); background-size: 40px 40px;"></div>
+      </div>
+      <!-- Chat Area -->
+      <div class="flex-1 overflow-y-auto chat-container p-6 md:p-10 space-y-8 relative z-10" id="chat-interface">
+        <!-- User Message -->
+        <div class="flex justify-end animate-fade-in ltr:justify-end rtl:justify-start">
+          <div
+            class="max-w-[80%] md:max-w-[70%] bg-surface-container text-on-surface p-4 md:p-5 rounded-2xl ltr:rounded-tr-none rtl:rounded-tl-none shadow-sm border border-outline-variant/30">
+            <p class="font-body-md text-body-md leading-relaxed" id="user-msg-content">
+              What are the requirements for a fixed-term employment contract in Egypt?
+            </p>
+            <div
+              class="mt-2 flex items-center justify-end gap-1 opacity-50 text-[10px] font-medium ltr:justify-end rtl:justify-start">
+              <span id="timestamp-text">10:42 AM</span>
+              <span class="material-symbols-outlined text-sm" data-icon="done_all">done_all</span>
+            </div>
+          </div>
+        </div>
+        <!-- AI Message -->
+        <div class="flex justify-start animate-fade-in ltr:justify-start rtl:justify-end"
+          style="animation-delay: 0.2s;">
+          <div class="flex gap-4 max-w-[90%] md:max-w-[80%] items-start ltr:flex-row rtl:flex-row-reverse">
+            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-md">
+              <span class="material-symbols-outlined text-on-primary text-xl" data-icon="smart_toy"
+                style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+            </div>
+            <div
+              class="bg-primary-container text-on-primary-container p-5 md:p-6 rounded-2xl ltr:rounded-tl-none rtl:rounded-tr-none shadow-xl border border-primary/20 relative">
+              <div
+                class="absolute -top-3 ltr:-right-3 rtl:-left-3 bg-tertiary-container text-on-tertiary-container border border-outline-variant px-3 py-1 rounded-full text-[11px] font-bold shadow-sm tracking-tight"
+                id="badge-text">
+                Art. 104
+              </div>
+              <div class="font-body-md text-body-md leading-relaxed space-y-4 text-white" id="ai-msg-content">
+                <p>According to the Egyptian Labor Law, a fixed-term contract must be in writing and specified for a
+                  certain duration. If the duration is not specified, the contract may be deemed indefinite under
+                  certain circumstances.</p>
+                <p>Key requirements include:</p>
+                <ul class="list-disc ltr:pl-5 rtl:pr-5 space-y-2 opacity-90">
+                  <li>Clear identification of both parties (Employer and Employee).</li>
+                  <li>A defined start and end date for the legal relationship.</li>
+                  <li>A detailed description of the job role and responsibilities.</li>
+                  <li>Explicit mention of the agreed salary and benefits.</li>
+                </ul>
+                <p class="text-on-primary-container text-sm italic pt-2 border-t border-white/10 brightness-125">
+                  Failure to renew a fixed-term contract in writing while continuing the relationship may convert it
+                  into an open-ended contract.
+                </p>
+              </div>
+              <div class="mt-6 border-t border-white/10 pt-4">
+                <button
+                  class="flex items-center gap-2 text-label-md font-bold text-on-primary-container hover:text-white transition-colors cursor-pointer w-full"
+                  id="source-toggle">
+                  <span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+                  <span id="source-label">Source: Egyptian Labor Law No. 12 of 2003</span>
+                  <span class="material-symbols-outlined text-sm ltr:ml-auto rtl:mr-auto transition-transform"
+                    data-icon="expand_more" id="expand-icon">expand_more</span>
+                </button>
+                <div
+                  class="hidden mt-3 p-4 bg-black/20 rounded-xl text-xs leading-relaxed font-mono text-white opacity-80 border border-white/5"
+                  id="source-content">
+                  "Article 104: The fixed-term employment contract shall terminate by the expiry of its term. If its
+                  term is continued after its expiry by its parties, it shall be considered as an indefinite contract
+                  renewal."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Spacer for input area -->
+        <div class="h-24"></div>
+      </div>
+      <!-- Input Area -->
+      <div
+        class="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest to-transparent pt-10 z-20">
+        <div
+          class="max-w-4xl mx-auto flex gap-3 items-center bg-white border border-outline-variant p-2 ltr:pl-5 rtl:pr-5 rounded-2xl shadow-lg focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all">
+          <input
+            class="flex-1 bg-transparent border-none focus:ring-0 text-body-md text-on-surface placeholder:text-on-surface-variant/60 py-3"
+            id="chat-input" placeholder="Ask the legal consultant..." type="text" />
+          <div class="flex items-center gap-2">
+            <button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+              <span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+            </button>
+            <button id="send-btn"
+              class="bg-primary text-on-primary w-12 h-12 rounded-xl flex items-center justify-center hover:bg-opacity-90 active:scale-95 transition-all shadow-md group">
+              <span
+                class="material-symbols-outlined ltr:group-hover:translate-x-1 ltr:group-hover:-translate-y-1 rtl:group-hover:-translate-x-1 rtl:group-hover:-translate-y-1 transition-transform"
+                data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+            </button>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <p class="text-[10px] text-on-surface-variant/60 font-medium tracking-wide" id="disclaimer-text">Qanoony AI
+            can make mistakes. Please verify critical legal information with a licensed attorney.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const translations = {
+      EN: {
+        logo: 'Qanoony',
+        consultationHeader: 'Quick Consultations',
+        upgradeTitle: 'Upgrade to Pro',
+        upgradeDesc: 'Unlimited AI legal consultations and document drafting.',
+        upgradeBtn: 'Upgrade Now',
+        helpText: 'Help Center',
+        logoutText: 'Log Out',
+        userMsg: 'What are the requirements for a fixed-term employment contract in Egypt?',
+        timestamp: '10:42 AM',
+        aiMsg: `
+                <p>According to the Egyptian Labor Law, a fixed-term contract must be in writing and specified for a certain duration. If the duration is not specified, the contract may be deemed indefinite under certain circumstances.</p>
+                <p>Key requirements include:</p>
+                <ul class="list-disc ltr:pl-5 rtl:pr-5 space-y-2 opacity-90">
+                    <li>Clear identification of both parties (Employer and Employee).</li>
+                    <li>A defined start and end date for the legal relationship.</li>
+                    <li>A detailed description of the job role and responsibilities.</li>
+                    <li>Explicit mention of the agreed salary and benefits.</li>
+                </ul>
+                <p class="text-on-primary-container text-sm italic pt-2 border-t border-white/10 brightness-125">
+                    Failure to renew a fixed-term contract in writing while continuing the relationship may convert it into an open-ended contract.
+                </p>
+            `,
+        badge: 'Art. 104',
+        sourceLabel: 'Source: Egyptian Labor Law No. 12 of 2003',
+        sourceContent: '"Article 104: The fixed-term employment contract shall terminate by the expiry of its term. If its term is continued after its expiry by its parties, it shall be considered as an indefinite contract renewal."',
+        inputPlaceholder: 'Ask the legal consultant...',
+        disclaimer: 'Qanoony AI can make mistakes. Please verify critical legal information with a licensed attorney.',
+        toast: 'Help Center coming soon!',
+        settingsTitle: 'Settings',
+        catAccount: 'Account Settings',
+        catNotif: 'Notification Preferences',
+        catDisplay: 'Display Mode',
+        catLegal: 'Legal',
+        optProfile: 'Profile Information',
+        optPass: 'Password & Security',
+        optEmail: 'Email Notifications',
+        optAlerts: 'App Alerts',
+        optLight: 'Light Mode',
+        optDark: 'Dark Mode',
+        optDisclaimer: 'Legal Disclaimer'
+      },
+      AR: {
+        logo: 'قانوني',
+        consultationHeader: 'استشارات سريعة',
+        upgradeTitle: 'الترقية إلى برو',
+        upgradeDesc: 'استشارات قانونية غير محدودة بالذكاء الاصطناعي وصياغة المستندات.',
+        upgradeBtn: 'اشترك الآن',
+        helpText: 'مركز المساعدة',
+        logoutText: 'تسجيل الخروج',
+        userMsg: 'ما هي متطلبات عقد العمل محدد المدة في مصر؟',
+        timestamp: '١٠:٤٢ صباحاً',
+        aiMsg: `
+                <p>وفقاً لقانون العمل المصري، يجب أن يكون العقد محدد المدة مكتوباً ومحدداً بفترة زمنية معينة. إذا لم يتم تحديد المدة، فقد يُعتبر العقد غير محدد المدة في حالات معينة.</p>
+                <p>المتطلبات الرئيسية تشمل:</p>
+                <ul class="list-disc ltr:pl-5 rtl:pr-5 space-y-2 opacity-90">
+                    <li>تحديد واضح لكلا الطرفين (صاحب العمل والعامل).</li>
+                    <li>تحديد تاريخ بداية ونهاية العلاقة القانونية.</li>
+                    <li>وصف تفصيلي للمسمى الوظيفي والمسؤوليات.</li>
+                    <li>ذكر صريح للراتب والمزايا المتفق عليها.</li>
+                </ul>
+                <p class="text-on-primary-container text-sm italic pt-2 border-t border-white/10 brightness-125">
+                    الفشل في تجديد العقد محدد المدة كتابياً مع استمرار العلاقة قد يحوله إلى عقد مفتوح.
+                </p>
+            `,
+        badge: 'مادة ١٠٤',
+        sourceLabel: 'المصدر: قانون العمل المصري رقم ١٢ لسنة ٢٠٠٣',
+        sourceContent: '"مادة ١٠٤: ينتهي عقد العمل محدد المدة بانقضاء مدته. فإذا انقضت مدته واستمر طرفاه في تنفيذه، اعتبر ذلك تجديداً للعقد لمدة غير محددة."',
+        inputPlaceholder: 'اسأل المستشار القانوني...',
+        disclaimer: 'يمكن أن يرتكب "قانوني" أخطاءً. يرجى التحقق من المعلومات القانونية الهامة مع محامٍ مرخص.',
+        toast: 'مركز المساعدة قريباً!',
+        settingsTitle: 'الإعدادات',
+        catAccount: 'إعدادات الحساب',
+        catNotif: 'تفضيلات الإشعارات',
+        catDisplay: 'وضع العرض',
+        catLegal: 'قانوني',
+        optProfile: 'معلومات الملف الشخصي',
+        optPass: 'كلمة المرور والأمان',
+        optEmail: 'إشعارات البريد الإلكتروني',
+        optAlerts: 'تنبيهات التطبيق',
+        optLight: 'الوضع الفاتح',
+        optDark: 'الوضع الداكن',
+        optDisclaimer: 'إخلاء المسؤولية القانونية'
+      }
+    };
+
+    const ACTIVE_CLASSES = ['text-primary', 'bg-primary-fixed', 'sidebar-btn-active'];
+    const INACTIVE_CLASSES = ['text-on-surface-variant', 'hover:bg-surface-container-high', 'rounded-xl', 'group'];
+
+    // Modal elements
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsModal = document.getElementById('settings-modal');
+    const closeSettings = document.getElementById('close-settings');
+    const disclaimerTrigger = document.getElementById('disclaimer-trigger');
+
+    settingsBtn.addEventListener('click', () => {
+      settingsModal.classList.remove('hidden');
+    });
+
+    closeSettings.addEventListener('click', () => {
+      settingsModal.classList.add('hidden');
+    });
+
+    // Close on click outside
+    settingsModal.addEventListener('click', (e) => {
+      if (e.target === settingsModal) {
+        settingsModal.classList.add('hidden');
+      }
+    });
+
+    disclaimerTrigger.addEventListener('click', () => {
+      settingsModal.classList.add('hidden');
+      const toastText = document.getElementById('toast-text');
+      const originalText = toastText.textContent;
+      toastText.textContent = document.body.dir === 'rtl' ? 'يتم عرض إخلاء المسؤولية...' : 'Loading Legal Disclaimer...';
+
+      const helpToast = document.getElementById('help-toast');
+      helpToast.classList.remove('toast-hide');
+      helpToast.classList.add('toast-show');
+      setTimeout(() => {
+        helpToast.classList.remove('toast-show');
+        helpToast.classList.add('toast-hide');
+        toastText.textContent = originalText;
+      }, 2000);
+    });
+
+    // Sidebar Interactivity
+    const sidebarButtons = document.querySelectorAll('.sidebar-btn');
+    const chatInterface = document.getElementById('chat-interface');
+
+    sidebarButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sidebarButtons.forEach(b => {
+          b.classList.remove(...ACTIVE_CLASSES);
+          b.classList.add(...INACTIVE_CLASSES);
+        });
+
+        btn.classList.add(...ACTIVE_CLASSES);
+        btn.classList.remove(...INACTIVE_CLASSES);
+      });
+    });
+
+    // Language Toggle Interactivity
+    const langEn = document.getElementById('lang-en');
+    const langAr = document.getElementById('lang-ar');
+    const body = document.body;
+
+    const setLanguage = (lang) => {
+      const isAr = lang === 'AR';
+      const t = translations[lang];
+
+      if (isAr) {
+        langAr.classList.add('bg-white', 'text-primary', 'font-bold', 'shadow-sm');
+        langAr.classList.remove('text-on-surface-variant');
+        langEn.classList.remove('bg-white', 'text-primary', 'font-bold', 'shadow-sm');
+        langEn.classList.add('text-on-surface-variant');
+        body.dir = 'rtl';
+      } else {
+        langEn.classList.add('bg-white', 'text-primary', 'font-bold', 'shadow-sm');
+        langEn.classList.remove('text-on-surface-variant');
+        langAr.classList.remove('bg-white', 'text-primary', 'font-bold', 'shadow-sm');
+        langAr.classList.add('text-on-surface-variant');
+        body.dir = 'ltr';
+      }
+
+      document.querySelectorAll('.nav-text').forEach(span => {
+        span.textContent = span.getAttribute(`data-${lang.toLowerCase()}`);
+      });
+
+      document.getElementById('logo-text').textContent = t.logo;
+      document.getElementById('consultation-header').textContent = t.consultationHeader;
+      document.getElementById('upgrade-title').textContent = t.upgradeTitle;
+      document.getElementById('upgrade-desc').textContent = t.upgradeDesc;
+      document.getElementById('upgrade-btn').textContent = t.upgradeBtn;
+      document.getElementById('help-text').textContent = t.helpText;
+      document.getElementById('logout-text').textContent = t.logoutText;
+      document.getElementById('disclaimer-text').textContent = t.disclaimer;
+      document.getElementById('chat-input').placeholder = t.inputPlaceholder;
+      document.getElementById('toast-text').textContent = t.toast;
+
+      // Update Modal Texts
+      document.getElementById('settings-title').textContent = t.settingsTitle;
+      document.getElementById('setting-cat-account').textContent = t.catAccount;
+      document.getElementById('setting-cat-notifications').textContent = t.catNotif;
+      document.getElementById('setting-cat-display').textContent = t.catDisplay;
+      document.getElementById('setting-cat-legal').textContent = t.catLegal;
+      document.getElementById('opt-profile').textContent = t.optProfile;
+      document.getElementById('opt-password').textContent = t.optPass;
+      document.getElementById('opt-email').textContent = t.optEmail;
+      document.getElementById('opt-alerts').textContent = t.optAlerts;
+      document.getElementById('opt-light').textContent = t.optLight;
+      document.getElementById('opt-dark').textContent = t.optDark;
+      document.getElementById('opt-disclaimer').textContent = t.optDisclaimer;
+
+      if (document.getElementById('user-msg-content')) {
+        document.getElementById('user-msg-content').textContent = t.userMsg;
+        document.getElementById('timestamp-text').textContent = t.timestamp;
+        document.getElementById('ai-msg-content').innerHTML = t.aiMsg;
+        document.getElementById('badge-text').textContent = t.badge;
+        document.getElementById('source-label').textContent = t.sourceLabel;
+        document.getElementById('source-content').textContent = t.sourceContent;
+      }
+
+      const sideNav = document.getElementById('side-nav');
+      if (isAr) {
+        sideNav.classList.remove('border-r');
+        sideNav.classList.add('border-l');
+      } else {
+        sideNav.classList.remove('border-l');
+        sideNav.classList.add('border-r');
+      }
+    };
+
+    langEn.addEventListener('click', () => setLanguage('EN'));
+    langAr.addEventListener('click', () => setLanguage('AR'));
+
+    // Source Expansion Toggle
+    const sourceToggle = document.getElementById('source-toggle');
+    const sourceContent = document.getElementById('source-content');
+    const expandIcon = document.getElementById('expand-icon');
+
+    if (sourceToggle) {
+      sourceToggle.addEventListener('click', () => {
+        sourceContent.classList.toggle('hidden');
+        expandIcon.style.transform = sourceContent.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+      });
+    }
+
+    // Help Center Toast
+    const helpBtn = document.getElementById('help-center-btn');
+    const helpToast = document.getElementById('help-toast');
+
+    helpBtn.addEventListener('click', () => {
+      helpToast.classList.remove('toast-hide');
+      helpToast.classList.add('toast-show');
+      setTimeout(() => {
+        helpToast.classList.remove('toast-show');
+        helpToast.classList.add('toast-hide');
+      }, 3000);
+    });
+
+    // Chat Input and Send Behavior
+    const sendButton = document.getElementById('send-btn');
+    const chatInput = document.getElementById('chat-input');
+    const chatSpacer = chatInterface.querySelector('.h-24');
+    const BOT_LOADING_ID = 'bot-loading-message';
+    let isWaitingForResponse = false;
+
+    const escapeHtml = (value) =>
+      value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+    const formatMessageText = (value) => escapeHtml(value).replace(/\n/g, '<br />');
+
+    const createMessageElement = ({ text, isUser = false, isLoading = false, id = '' }) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = `flex ${isUser ? 'justify-end ltr:justify-end rtl:justify-start' : 'justify-start ltr:justify-start rtl:justify-end'} animate-fade-in`;
+      if (!isUser) wrapper.style.animationDelay = '0.2s';
+      if (id) wrapper.id = id;
+
+      if (isUser) {
+        wrapper.innerHTML = `
+          <div class="max-w-[80%] md:max-w-[70%] bg-surface-container text-on-surface p-4 md:p-5 rounded-2xl ltr:rounded-tr-none rtl:rounded-tl-none shadow-sm border border-outline-variant/30">
+            <p class="font-body-md text-body-md leading-relaxed">${formatMessageText(text)}</p>
+            <div class="mt-2 flex items-center justify-end gap-1 opacity-50 text-[10px] font-medium ltr:justify-end rtl:justify-start">
+              <span>${new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</span>
+              <span class="material-symbols-outlined text-sm" data-icon="done_all">done_all</span>
+            </div>
+          </div>
+        `;
+      } else {
+        wrapper.innerHTML = `
+          <div class="flex gap-4 max-w-[90%] md:max-w-[80%] items-start ltr:flex-row rtl:flex-row-reverse">
+            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-md">
+              <span class="material-symbols-outlined text-on-primary text-xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+            </div>
+            <div class="bg-primary-container text-on-primary-container p-5 md:p-6 rounded-2xl ltr:rounded-tl-none rtl:rounded-tr-none shadow-xl border border-primary/20 relative">
+              <div class="font-body-md text-body-md leading-relaxed space-y-4 text-white">${formatMessageText(text)}</div>
+            </div>
+          </div>
+        `;
+      }
+      return wrapper;
+    };
+
+    const appendChatMessage = (element) => {
+      if (chatSpacer) {
+        chatInterface.insertBefore(element, chatSpacer);
+      } else {
+        chatInterface.appendChild(element);
+      }
+      chatInterface.scrollTop = chatInterface.scrollHeight;
+    };
+
+    const removeLoadingMessage = () => {
+      const loadingElement = document.getElementById(BOT_LOADING_ID);
+      if (loadingElement) {
+        loadingElement.remove();
+      }
+    };
+
+    const displayBotResponse = (text) => {
+      removeLoadingMessage();
+      appendChatMessage(createMessageElement({ text, isUser: false }));
+    };
+
+    const setWaitingState = (waiting) => {
+      isWaitingForResponse = waiting;
+      sendButton.disabled = waiting;
+    };
+
+    const sendChatMessage = async () => {
+      if (isWaitingForResponse) return;
+
+      const userMessage = chatInput.value.trim();
+      if (!userMessage) return;
+
+      setWaitingState(true);
+      appendChatMessage(createMessageElement({ text: userMessage, isUser: true }));
+      appendChatMessage(createMessageElement({ text: 'جاري التفكير...', isUser: false, isLoading: true, id: BOT_LOADING_ID }));
+      chatInput.value = '';
+      chatInput.focus();
+
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userMessage }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network error');
+        }
+
+        const data = await response.json();
+        if (data.answer) {
+          displayBotResponse(data.answer);
+        } else {
+          throw new Error('Invalid response');
+        }
+      } catch (error) {
+        displayBotResponse('حدث خطأ أثناء الاتصال بالخادم.');
+      } finally {
+        setWaitingState(false);
+      }
+    };
+
+    sendButton.addEventListener('click', sendChatMessage);
+
+    chatInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        if (!isWaitingForResponse) {
+          sendChatMessage();
+        }
+      }
+    });
+
+    // Scroll Bottom
+    chatInterface.scrollTop = chatInterface.scrollHeight;
+  </script>
+</body>
+
+</html>

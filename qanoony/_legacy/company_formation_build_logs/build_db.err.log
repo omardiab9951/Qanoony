@@ -1,0 +1,4 @@
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\Company_Formation\build_db.py:14: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.document_loaders import PyPDFLoader
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\Backend\.venv\Lib\site-packages\huggingface_hub\file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(

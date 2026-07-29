@@ -1,0 +1,5 @@
+﻿C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\employment\chroma_db
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\employment\raw
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\employment\chroma_db\chroma_db
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\employment\chroma_db\chroma_db\af4123e5-bb04-48db-a322-867e59f814cb
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\employment\chroma_db\chroma_db\chroma.sqlite3

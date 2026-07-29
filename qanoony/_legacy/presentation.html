@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qanoony Presentation</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#ccdbf4",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#64539c",
+            "surface-container-high": "#dce9ff",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#e8deff",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#494453",
+            "secondary-fixed-dim": "#c9c5ce",
+            "inverse-on-surface": "#eaf1ff",
+            "on-secondary-fixed-variant": "#48464d",
+            "tertiary": "#4c3b82",
+            "primary-fixed": "#e9ddff",
+            "secondary": "#5f5d65",
+            "secondary-fixed": "#e5e1ea",
+            "surface-container-highest": "#d4e4fc",
+            "surface": "#f8f9ff",
+            "background": "#f8f9ff",
+            "on-surface": "#0d1c2e",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#64616a",
+            "outline-variant": "#cbc3d5",
+            "on-tertiary-container": "#ded2ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-tint": "#6b46c1",
+            "on-background": "#0d1c2e",
+            "on-secondary-fixed": "#1c1b22",
+            "primary-container": "#6b46c1",
+            "inverse-surface": "#223144",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed": "#23005c",
+            "on-tertiary-fixed": "#1f0855",
+            "on-error": "#ffffff",
+            "secondary-container": "#e2dee8",
+            "primary-fixed-dim": "#d0bcff",
+            "on-primary-container": "#e1d2ff",
+            "on-error-container": "#93000a",
+            "primary": "#532aa8",
+            "inverse-primary": "#d0bcff",
+            "on-primary-fixed-variant": "#522aa7",
+            "surface-variant": "#d4e4fc",
+            "surface-container": "#e5eeff",
+            "tertiary-fixed-dim": "#cdbdff",
+            "outline": "#7a7484",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-fixed-variant": "#4c3b82",
+            "surface-container-low": "#eff4ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "sidebar-width": "280px",
+            "margin-mobile": "16px",
+            "margin-desktop": "40px",
+            "gutter": "24px",
+            "container-max": "1280px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["IBM Plex Sans"],
+            "body-sm": ["IBM Plex Sans"],
+            "body-md": ["IBM Plex Sans"],
+            "headline-lg": ["IBM Plex Sans"],
+            "headline-xl": ["IBM Plex Sans"],
+            "headline-md": ["IBM Plex Sans"],
+            "body-lg": ["IBM Plex Sans"],
+            "label-sm": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: 'IBM Plex Sans', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .slide { display: none; min-height: 100vh; }
+    .slide.active { display: flex; }
+    .deck-card { box-shadow: 0 24px 60px rgba(83, 42, 168, 0.14); }
+    .flow-arrow::after {
+      content: "arrow_forward";
+      font-family: "Material Symbols Outlined";
+      color: #532aa8;
+      font-size: 28px;
+      line-height: 1;
+    }
+    @media (max-width: 900px) {
+      .flow-arrow::after { content: "arrow_downward"; }
+    }
+    @media print {
+      body { overflow: visible; }
+      .slide { display: flex !important; page-break-after: always; min-height: 100vh; }
+      .controls { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface overflow-hidden">
+  <main id="deck">
+    <section class="slide active items-center justify-center p-6 md:p-margin-desktop">
+      <div class="deck-card w-full max-w-5xl rounded-xl bg-surface-container-lowest border border-outline-variant p-8 md:p-14 text-center">
+        <p class="text-label-md uppercase text-primary mb-8">LLM + RAG + LangChain</p>
+        <h1 class="text-[64px] md:text-[104px] leading-none font-bold text-primary tracking-tight">Qanoony</h1>
+        <p class="mt-5 text-headline-lg text-on-surface" lang="ar" dir="rtl">قانوني</p>
+        <p class="mt-10 mx-auto max-w-3xl text-body-lg md:text-headline-md text-on-surface-variant">
+          An AI legal assistant grounded in real Egyptian law — for employers and startup founders
+        </p>
+      </div>
+    </section>
+
+    <section class="slide items-center justify-center p-6 md:p-margin-desktop">
+      <div class="deck-card w-full max-w-5xl rounded-xl bg-surface-container-lowest border border-outline-variant p-8 md:p-14">
+        <p class="text-label-md uppercase text-primary mb-4">The Problem</p>
+        <h2 class="text-headline-xl md:text-[56px] md:leading-[64px] font-semibold text-on-surface max-w-4xl">
+          Legal questions shouldn't require guessing
+        </h2>
+        <div class="mt-10 grid gap-4">
+          <p class="rounded-xl bg-surface-container p-5 text-body-lg border border-outline-variant">Lawyers are expensive for simple employer questions.</p>
+          <p class="rounded-xl bg-surface-container p-5 text-body-lg border border-outline-variant">Online advice is unreliable, fragmented, and hard to verify.</p>
+          <p class="rounded-xl bg-surface-container p-5 text-body-lg border border-outline-variant">Generic AI chatbots can give confident wrong or outdated answers because they are not grounded in actual Egyptian law.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide items-center justify-center p-6 md:p-margin-desktop">
+      <div class="deck-card w-full max-w-5xl rounded-xl bg-primary-container text-on-primary-container border border-primary/20 p-8 md:p-14">
+        <p class="text-label-md uppercase text-primary-fixed-dim mb-4">The Solution</p>
+        <h2 class="text-headline-xl md:text-[56px] md:leading-[64px] font-semibold text-white">
+          Every answer, grounded and cited
+        </h2>
+        <div class="mt-10 grid md:grid-cols-2 gap-4">
+          <p class="rounded-xl bg-white/10 p-5 text-body-lg border border-white/10">Retrieves from real, current Egyptian legal text.</p>
+          <p class="rounded-xl bg-white/10 p-5 text-body-lg border border-white/10">Covers Labor Law 14/2025 and Company Formation laws.</p>
+          <p class="rounded-xl bg-white/10 p-5 text-body-lg border border-white/10">Cites the specific source used for the answer.</p>
+          <p class="rounded-xl bg-white/10 p-5 text-body-lg border border-white/10">Refuses out-of-scope questions and supports English and Arabic.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide items-center justify-center p-6 md:p-margin-desktop">
+      <div class="deck-card w-full max-w-6xl rounded-xl bg-surface-container-lowest border border-outline-variant p-8 md:p-12">
+        <p class="text-label-md uppercase text-primary mb-4">Architecture</p>
+        <h2 class="text-headline-xl md:text-[56px] md:leading-[64px] font-semibold text-on-surface">Under the hood</h2>
+        <div class="mt-10 flex flex-col lg:flex-row items-stretch lg:items-center gap-3">
+          <div class="flex-1 rounded-xl bg-surface-container p-5 border border-outline-variant text-center font-semibold">User Question</div>
+          <div class="flow-arrow flex items-center justify-center"></div>
+          <div class="flex-1 rounded-xl bg-primary-fixed p-5 border border-primary-fixed-dim text-center font-semibold">Retriever<br><span class="text-body-sm font-normal">ChromaDB + bge-m3</span></div>
+          <div class="flow-arrow flex items-center justify-center"></div>
+          <div class="flex-1 rounded-xl bg-surface-container p-5 border border-outline-variant text-center font-semibold">Relevant Legal Articles</div>
+          <div class="flow-arrow flex items-center justify-center"></div>
+          <div class="flex-1 rounded-xl bg-tertiary-fixed p-5 border border-tertiary-fixed-dim text-center font-semibold">LLM<br><span class="text-body-sm font-normal">Groq / Llama 3.3</span></div>
+          <div class="flow-arrow flex items-center justify-center"></div>
+          <div class="flex-1 rounded-xl bg-primary-container text-on-primary-container p-5 border border-primary/20 text-center font-semibold">Cited Answer</div>
+        </div>
+        <p class="mt-10 text-body-md text-on-surface-variant">
+          Modular architecture — isolated knowledge bases per legal domain (Employment Law live, Company Formation in progress)
+        </p>
+      </div>
+    </section>
+
+    <section class="slide items-center justify-center p-6 md:p-margin-desktop">
+      <div class="deck-card w-full max-w-5xl rounded-xl bg-surface-container-lowest border border-outline-variant p-8 md:p-14">
+        <p class="text-label-md uppercase text-primary mb-4">Demo</p>
+        <h2 class="text-headline-xl md:text-[56px] md:leading-[64px] font-semibold text-on-surface">Not just another chatbot</h2>
+        <div class="mt-10 grid md:grid-cols-2 gap-5">
+          <div class="rounded-xl bg-error-container border border-error/30 p-6">
+            <h3 class="text-headline-md text-on-error-container mb-5">Generic AI</h3>
+            <ul class="space-y-3 text-body-lg text-on-error-container">
+              <li>Vague answers</li>
+              <li>Unsourced claims</li>
+              <li>Possibly outdated law</li>
+            </ul>
+          </div>
+          <div class="rounded-xl bg-primary-container border border-primary/20 p-6 text-on-primary-container">
+            <h3 class="text-headline-md text-white mb-5">Qanoony</h3>
+            <ul class="space-y-3 text-body-lg">
+              <li>Cited answers</li>
+              <li>Current legal corpus</li>
+              <li>Refuses when unsure</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-10 rounded-xl bg-surface-container p-5 text-body-lg text-on-surface border border-outline-variant">
+          Built as a full working prototype — live demo available
+        </p>
+      </div>
+    </section>
+
+    <section class="slide items-center justify-center p-6 md:p-margin-desktop">
+      <div class="deck-card w-full max-w-5xl rounded-xl bg-primary-container text-on-primary-container border border-primary/20 p-8 md:p-16 text-center">
+        <p class="text-label-md uppercase text-primary-fixed-dim mb-8">The End</p>
+        <h2 class="text-[56px] md:text-[88px] leading-none font-bold text-white tracking-tight">Thank you</h2>
+        <p class="mt-8 text-headline-md md:text-headline-lg text-on-primary-container">Questions &amp; Answers</p>
+        <p class="mt-10 text-body-lg text-on-primary-container">Qanoony — قانوني</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="controls fixed bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-surface-container-lowest border border-outline-variant rounded-full px-3 py-2 shadow-xl">
+    <button id="prev" class="rounded-full p-2 text-primary hover:bg-surface-container-high" aria-label="Previous slide">
+      <span class="material-symbols-outlined">chevron_left</span>
+    </button>
+    <span id="counter" class="text-label-md text-on-surface-variant min-w-12 text-center">1 / 6</span>
+    <button id="next" class="rounded-full p-2 text-primary hover:bg-surface-container-high" aria-label="Next slide">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </button>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const counter = document.getElementById('counter');
+    let current = 0;
+
+    function showSlide(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      counter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('prev').addEventListener('click', () => showSlide(current - 1));
+    document.getElementById('next').addEventListener('click', () => showSlide(current + 1));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') showSlide(current - 1);
+      if (event.key === 'ArrowRight') showSlide(current + 1);
+    });
+    showSlide(0);
+  </script>
+</body>
+</html>

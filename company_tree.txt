@@ -1,0 +1,25 @@
+﻿C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chroma_db
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chunks
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\cleaned
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\embeddings
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\raw
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chroma_db\chroma_db
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chroma_db\chroma_db\9197f225-1a99-4aa4-81d0-44d088e1144d
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chroma_db\chroma_db\chroma.sqlite3
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chroma_db\chroma_db\9197f225-1a99-4aa4-81d0-44d088e1144d\index_metadata.pickle
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chunks\chunks
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\chunks\chunks\company_formation_chunks.jsonl
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\cleaned\cleaned
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\cleaned\cleaned\Investment Law.txt
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\cleaned\cleaned\ISC Guide English (1).txt
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\cleaned\cleaned\ISC Guide English.txt
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\cleaned\cleaned\Law No. 72 of 2017.txt
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\cleaned\cleaned\Lawno159oftheyear1981.txt
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\embeddings\embeddings
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\embeddings\raw
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\raw\raw
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\raw\raw\Investment Law.pdf
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\raw\raw\ISC Guide English (1).pdf
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\raw\raw\ISC Guide English.pdf
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\raw\raw\Law No. 72 of 2017.pdf
+C:\Users\o3995\Downloads\Tips-Hindawi-Internship\Final Project\web\qanoony\data\company_formation\raw\raw\Lawno159oftheyear1981.pdf
